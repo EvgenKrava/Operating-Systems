@@ -1,0 +1,5 @@
+a.out
+ls.txt
+main.c
+Start the program
+0
