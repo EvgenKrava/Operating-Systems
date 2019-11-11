@@ -59,17 +59,15 @@ int main(int argc, char **argv) {
 	}
 	printf("System variable name: %s\n", systemVariableName);
 	printf("Proccess count: %d\n", n);
-	printf("file: %s\n", getenv("FILE_NAME"));
 	char *s = malloc(sizeof(char) * 255);
 	s = strcat(s, "FILE_NAME=");
 	s = strcat(s, systemVariableName);
 	putenv(s);
-	printf("%s\n", getenv("FILE_NAME"));
 	for(int i = 1; i <= n; ++i) {
-		if(fork() == 0){ 
+		if(fork() == 0) { 
 			char p[17];
 			itoa (i, p);
-        	char *args[]={"./sub", p, NULL}; 
+        	char *args[]={"./sub", p, getenv("FILE_NAME") , NULL}; 
         	execvp(args[0], args); 
     }
 	}
