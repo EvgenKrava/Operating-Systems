@@ -43,11 +43,13 @@ int main(int argc, char **argv) {
 	};
 	int n = 0;	
 	char c;
+	int sv = 0;
 	while ((c = getopt_long(argc, argv, "f:n:", long_opt, NULL)) != -1) {
 		switch(c){
 			case 'f':
 				systemVariableName = malloc(strlen(optarg) * sizeof(char));
 				systemVariableName = strcpy(systemVariableName, optarg);
+				sv = 1;
 				break;
 			case 'n':
 				n = atoi(optarg);
@@ -71,7 +73,9 @@ int main(int argc, char **argv) {
         	execvp(args[0], args); 
     }
 	}
-	free(systemVariableName);
+	if (sv) {
+		free(systemVariableName);	
+	}
 	free(s);
 	return EXIT_SUCCESS; /* exit(0); */
 }
