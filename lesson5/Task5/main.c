@@ -65,14 +65,21 @@ int main(int argc, char **argv) {
 	s = strcat(s, "FILE_NAME=");
 	s = strcat(s, systemVariableName);
 	putenv(s);
+	char *sub = malloc(sizeof(char) * 256);
+	sub = strcat(sub, "./sub ");
+	sub = strcat(sub, systemVariableName);
+	sub = strcat(sub, " ");
 	for(int i = 1; i <= n; ++i) {
-		if(fork() == 0) { 
-			char p[17];
-			itoa (i, p);
-        	char *args[]={"./sub", p, getenv("FILE_NAME") , NULL}; 
-        	execvp(args[0], args); 
-    }
+		char *si = malloc(sizeof(char) * 10);
+		char *tmp = malloc(sizeof(char) * 256);			
+		itoa(i, si);
+		strcat(tmp, sub);
+		strcat(tmp, si);
+		system(tmp);
+		free(si);
+		free(tmp);
 	}
+	free(sub);
 	if (sv) {
 		free(systemVariableName);	
 	}
