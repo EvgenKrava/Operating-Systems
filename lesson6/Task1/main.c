@@ -80,10 +80,10 @@ int main(int argc,char** argv){
                 arr[6] = 1;
                 break;
             case 'a':
-				for(int i = 0; i < 7 ; ++i){
-					arr[i] = 1;
-				}
-				break;
+			for(int i = 0; i < 7 ; ++i){
+				arr[i] = 1;
+			}
+			break;
 			case '?':
 				print_help();
 			
