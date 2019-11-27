@@ -60,7 +60,7 @@ int main(){
 	pthread_create(&thread1, NULL, &func1, &arg1);
 	pthread_create(&thread2, NULL, &func2, &r);
 	pthread_join(thread1, NULL);
-	pthread_join(thread2, NULL);
+	pthread_join(thread1, NULL);
 	printf("Program finish\n");
 	return 0;
 }

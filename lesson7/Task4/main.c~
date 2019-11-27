@@ -28,8 +28,8 @@ void *func1(void *arg){
 		kat[i] = fact(2 * i) / (fact(i + 1) * fact(i));
 	}
 	printf("Katalan's numbers finish\n");
-	//pthread_exit(kat);
-	return kat;
+	pthread_exit(kat);
+	return NULL;
 }
 
 void *func2(void *arg) {
@@ -43,8 +43,8 @@ void *func2(void *arg) {
 		}
 	}
 	printf("Simple numbers finish\n");
-	//pthread_exit(sim);
-	return sim;
+	pthread_exit(sim);
+	return NULL;
 }
 
 int main(int argc, char **argv){
