@@ -8,8 +8,8 @@
 int *global_data;
 
 void *thread_function(void *n) {
-    fprintf(stdout, "Thread %d started\n", *((int *) n));
-    sleep(*((int *) n));
+	fprintf(stdout, "Thread %d started\n", *((int *) n));
+	sleep(*((int *) n));
 	int sec = rand() % 10 + 1;
     global_data[*((int *) n)] = sec;
 	sleep(sec);
