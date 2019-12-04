@@ -25,7 +25,7 @@ void* read_thread(void* n){
 		usleep(500);
 		pos = rand() % data.n;
 		while(pthread_rwlock_rdlock(&data.lock) != 0);
-		fprintf(stdout, "thread %du read value %d from arr[%d] \n", (int)pthread_self(), data.arr[pos], pos);
+		fprintf(stdout, "thread %lu read value %d from arr[%d] \n", (unsigned long)pthread_self(), data.arr[pos], pos);
         pthread_rwlock_unlock(&data.lock);
     }
 }
@@ -37,7 +37,7 @@ void* write_thread(void* n){
 		pos = rand() % data.n;
 		data.arr[pos] = rand() % 1000;
 		while(pthread_rwlock_wrlock(&data.lock) != 0);
-		fprintf(stdout,"thread %du write value %d from arr[%d] \n", (int)pthread_self(), data.arr[pos], pos);
+		fprintf(stdout,"thread %lu write value %d from arr[%d] \n", (unsigned long)pthread_self(), data.arr[pos], pos);
 		pthread_rwlock_unlock(&data.lock);
 	}
 }
@@ -86,6 +86,6 @@ int main(int argc, char** argv){
     memset(data.arr, 0, sizeof(int) * n);
     pthread_rwlock_init(&data.lock, NULL);
     run_threads(n);
-    while(1);
+	usleep(1000);
     return 0;
 }

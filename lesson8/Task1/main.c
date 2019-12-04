@@ -26,7 +26,7 @@ void *daemon_function(void *n) {
             fprintf(stdout, "%d ", global_data[i]);
         }
         fprintf(stdout, "\n");
-        if (!cnt)break;
+        if (!cnt) break;
         sleep(1);
     }
     fprintf(stdout, "Daemon finished\n");

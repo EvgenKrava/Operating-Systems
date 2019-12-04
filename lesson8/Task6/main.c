@@ -10,17 +10,17 @@ void destructor(void* data){
 
 void* child_thread(void* param){
     
+    pthread_cleanup_push(&destructor, &cnt);
     pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
     pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
     fprintf(stdout, "Child thread started!\n");
     int cnt = 0;
     while(1) {
-        pthread_cleanup_push(&destructor, &cnt);
         fprintf(stdout, "Child thread Iterate %d\n", cnt);
         cnt++;
         sleep(1);
-        pthread_cleanup_pop(0);
     }
+    pthread_cleanup_pop(0);
 }
 
 
