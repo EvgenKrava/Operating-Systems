@@ -1,40 +1,21 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <signal.h>
+#include <stdio.h>
 #include <unistd.h>
+#include <signal.h>
 
 
-#define tim_cnt 1
-
-pid_t pid;
+char* msg;
 
 void my_handler(int signo){
-    if(signo==SIGUSR1){
-        sleep(tim_cnt);
-        if(pid==0){
-            printf("Child process message!\n");
-            kill(getppid(),SIGUSR1);
-        }else{
-            printf("Parent process message!\n");
-            kill(pid,SIGUSR1); 
-        }
-    }
+    printf("%s\n", msg);
 }
 
-int main(int argc,char**  argv){
-    signal(SIGUSR1,&my_handler);
-    pid = fork();
-    if(pid==0){
-        printf("Child process %d\n",getpid());
-        while(1){
-            pause();
-        }
-    }else{
-        printf("Parent process %d\n",getpid());
-        kill(pid,SIGUSR1);
-        while(1){
-            pause();
-        }        
-    }
+
+int main(int argc, char** argv){
+    if(argc < 3) return 0;
+    msg = argv[2];
+    int n = atoi(argv[1]);
+    alarm(n);
+    pause();
     return 0;
 }
