@@ -15,6 +15,7 @@ int main(int argc, char** argv){
     if(argc < 3) return 0;
     msg = argv[2];
     int n = atoi(argv[1]);
+	signal(SIGALRM, my_handler);
     alarm(n);
     pause();
     return 0;
